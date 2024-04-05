@@ -1,10 +1,26 @@
 "use client"
 
+import { Modal } from "@/components/Modal";
 import { PhotoItem } from "@/components/PhotoItem";
 import { photoList } from "@/data/photoList";
+import { useState } from "react";
 
 function Page() {
-  
+  const [showModal, setShowModal] = useState(false);
+  const [imageOfModal, setImageOfModal] = useState('');
+
+  function openModal(id: number) {
+    const photo = photoList.find(item => item.id === id);
+
+    if (photo) {
+      setImageOfModal(photo.url);
+      setShowModal(true);
+    }
+  }
+
+  function closeModal() {
+    setShowModal(false);
+  }
 
   return (
     <div className="mx-6">
@@ -15,11 +31,19 @@ function Page() {
           <PhotoItem
             key={item.id}
             photo={item}
-            onClick={() => {}}
+            onClick={() => openModal(item.id)}
           />
 
         )}
       </section>
+
+      {showModal &&
+        <Modal
+          image={imageOfModal}
+          closeModal={closeModal}
+        />
+      }
+
     </div>
   );
 }
