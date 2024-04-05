@@ -1,16 +1,25 @@
+"use client"
+
+import { PhotoItem } from "@/components/PhotoItem";
 import { photoList } from "@/data/photoList";
 
 function Page() {
+  
+
   return (
     <div className="mx-6">
       <h1 className="text-center my-9 text-4xl">Photo Galery</h1>
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {photoList.map(item =>
-          <div>
-            ...
-          </div>
+
+          <PhotoItem
+            key={item.id}
+            photo={item}
+            onClick={() => {}}
+          />
+
         )}
-      </div>
+      </section>
     </div>
   );
 }
